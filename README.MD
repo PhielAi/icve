@@ -19,7 +19,7 @@
 
 	your_account = '你的账号'
 	your_password = '你的密码'
-	your_class = '你的班级'
+	your_class = '你的课程名称'
 
 ##  4、运行程序
 ##### - - 在终端运行
