@@ -1,5 +1,4 @@
 from DrissionPage import ChromiumPage, ChromiumOptions
-from DrissionPage.common import Actions
 import pyautogui
 import re
 
