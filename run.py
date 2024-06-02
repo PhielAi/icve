@@ -126,7 +126,8 @@ def learn():
                 print('complete')
                 continue
             else:
-                  find()  
+                page.ele(' 课程首页 ').click()
+                find()  
         
         # ppt & word
         elif obj.ele('xpath://div[@class="el-carousel el-carousel--horizontal"]'):
@@ -153,7 +154,8 @@ def learn():
                 print('complete')
                 continue
             else:
-                  find()
+                page.ele(' 课程首页 ').click()
+                find()
         
         else:
             print('未找到元素，请检查代码是否出错！')
