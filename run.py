@@ -123,6 +123,7 @@ def learn():
             # next
             if obj.ele('xpath://div[@class="next"]/a[@class="el-link el-link--primary"]/span[@class="el-link--inner"]').text != '暂无':
                 obj.ele('xpath://div[@class="next"]/a[@class="el-link el-link--primary"]').click()
+                print('complete')
                 continue
             else:
                   find()  
@@ -149,6 +150,7 @@ def learn():
             # next
             if obj.ele('xpath://div[@class="next"]/a[@class="el-link el-link--primary"]/span[@class="el-link--inner"]').text != '暂无':
                 obj.ele('xpath://div[@class="next"]/a[@class="el-link el-link--primary"]').click()
+                print('complete')
                 continue
             else:
                   find()
