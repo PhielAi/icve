@@ -1,6 +1,8 @@
 from DrissionPage import ChromiumPage, ChromiumOptions
 import pyautogui
 import re
+import sys
+import time
 
 # 学习的课程
 your_class=''
@@ -117,8 +119,11 @@ def learn():
             time_all=obj.ele('xpath://span[@class="vjs-duration-display"]').text
             time_all=time_to_seconds(time_all)
             
-            print(f'wait {time_all-time_cur+1} second')
-            page.wait(time_all-time_cur+1)
+            wait_time=time_all-time_cur+1, 0, -1
+            for i in range(wait_time,0,-1):
+                sys.stdout.write(f"\rwait: {i} second")
+                sys.stdout.flush()  # 刷新输出，使其立即显示
+                time.sleep(1)
             
             # next
             if obj.ele('xpath://div[@class="next"]/a[@class="el-link el-link--primary"]/span[@class="el-link--inner"]').text != '暂无':
