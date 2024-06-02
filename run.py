@@ -121,9 +121,11 @@ def learn():
             page.wait(time_all-time_cur+1)
             
             # next
-            obj.ele('xpath://div[@class="next"]/a[@class="el-link el-link--primary"]').click()
-            print('complete')
-            continue
+            if obj.ele('xpath://div[@class="next"]/a[@class="el-link el-link--primary"]/span[@class="el-link--inner"]').text != '暂无':
+                obj.ele('xpath://div[@class="next"]/a[@class="el-link el-link--primary"]').click()
+                continue
+            else:
+                  find()  
         
         # ppt & word
         elif obj.ele('xpath://div[@class="el-carousel el-carousel--horizontal"]'):
@@ -145,9 +147,11 @@ def learn():
                     obj.ele('下一页').click()
             
             # next
-            obj.ele('xpath://div[@class="next"]/a[@class="el-link el-link--primary"]').click()
-            print('complete')
-            continue
+            if obj.ele('xpath://div[@class="next"]/a[@class="el-link el-link--primary"]/span[@class="el-link--inner"]').text != '暂无':
+                obj.ele('xpath://div[@class="next"]/a[@class="el-link el-link--primary"]').click()
+                continue
+            else:
+                  find()
         
         else:
             print('未找到元素，请检查代码是否出错！')
