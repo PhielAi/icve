@@ -46,7 +46,8 @@ def query():
         if course.ele(your_class):
             print(f'已找到课程，准备开始学习：{your_class}')
             course.ele('查看').click()
-            find() 
+            find()
+            return
         else:
             print(f'未找到{your_class}，查看下一个目录')
             print('loading...')
@@ -91,11 +92,23 @@ def find():
             print('本目录学习完毕，开始学习下一个目录...')
             
         else:
-            # 输出当前课程学习进度
-            print('\n'+title.ele('xpath://div[@class="tit"]').text+title.ele('xpath://div[@class="el-progress__text"]').text)
-            print('当前学习进度已完成，查看下个章节')
-            print('loading...')
-            continue       
+            if title ==  obj.eles('xpath://div[@class="listItem"]')[len(obj.eles('xpath://div[@class="listItem"]'))-1]:
+                print('\n已检测到所有进度学习完毕！')
+                print(r'''       
+                 (__)
+                 (oo) 
+           /------\/ 
+          / |    ||   
+         *  /\---/\ 
+            ~~   ~~   
+.........."Good job!"..........''')
+                return
+            else:
+                # 输出当前课程学习进度
+                print('\n'+title.ele('xpath://div[@class="tit"]').text+title.ele('xpath://div[@class="el-progress__text"]').text)
+                print('当前学习进度已完成，查看下个章节')
+                print('loading...')
+                continue       
                 
 def learn():
     while True:
@@ -108,7 +121,7 @@ def learn():
             print('\nstart to learn video...')
             page.wait(0.5)
             # 弹窗
-            if not Pop_ups():
+            if not pop_ups():
                 # play
                 obj.ele('xpath://button[@title="Play Video"]').click()
             page.wait(1)
@@ -119,9 +132,9 @@ def learn():
             time_all=obj.ele('xpath://span[@class="vjs-duration-display"]').text
             time_all=time_to_seconds(time_all)
             
-            wait_time=time_all-time_cur+1, 0, -1
+            wait_time=time_all-time_cur+1
             for i in range(wait_time,0,-1):
-                sys.stdout.write(f"\rwait: {i} second")
+                sys.stdout.write(f"\rPlease wait: {i} second")
                 sys.stdout.flush()  # 刷新输出，使其立即显示
                 time.sleep(1)
             
@@ -139,7 +152,7 @@ def learn():
             print('\nstart to learn ppt & word...')
             page.wait(0.5)
             # 弹窗
-            Pop_ups()
+            pop_ups()
             # 寻找页数
             text=obj.ele('xpath://div[@class="page"]').text
             result=re.match(pattern='.+\d+ / (\d+).+',string=text)
@@ -165,7 +178,7 @@ def learn():
         else:
             print('未找到元素，请检查代码是否出错！')
             
-def Pop_ups():
+def pop_ups():
     if page.ele('xpath://div[@class="el-message-box__wrapper"]'):
         str=page.ele('xpath://div[@class="el-message-box__wrapper"]').attr('style')
         result=re.match(pattern='.+\d+;(.*)',string=str)
@@ -175,6 +188,8 @@ def Pop_ups():
         else:
             page.ele('xpath://button[@class="el-button el-button--default el-button--small el-button--primary "]').click()
             return True
+    else:
+        pass
     
     
 def time_to_seconds(time_str):
