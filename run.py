@@ -4,11 +4,9 @@ import sys
 import time
 
 # 学习的课程
-your_class=''
-your_account=''
-your_password=''
-# img
-img='icve/image.png'
+your_class=input('输入你的课程名称：')
+your_account=input('输入你的账号：')
+your_password=input('输入你的密码：')
 
 def login(url):
     page.get(url=url,retry=3,interval=2,timeout=10)
