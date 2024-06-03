@@ -1,5 +1,4 @@
 from DrissionPage import ChromiumPage, ChromiumOptions
-import pyautogui
 import re
 import sys
 import time
@@ -25,8 +24,10 @@ def login(url):
             page.ele('xpath://input[@placeholder="请输入账号"]').input(your_account)
             page.ele('xpath://input[@placeholder="请输入密码"]').input(your_password)
             page.ele('xpath://span[@class="el-checkbox__inner"]').click()
-            loc=pyautogui.locateCenterOnScreen(img)
-            pyautogui.click(loc,duration=0.25,clicks=1)
+            for i in page.eles('xpath://form[@class="el-form demo-ruleForm"]/div'):
+                if i.text == '登录':
+                    i.click()
+            print(i)
             page.wait.load_start()
             query()
             
