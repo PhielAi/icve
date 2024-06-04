@@ -158,12 +158,15 @@ def learn():
             obj_num=result.group(1)
             
             # 翻页
-            for page_num in range(1,eval(obj_num)):
-                
-                if page_num == obj_num:
-                    break
-                else:
-                    obj.ele('下一页').click()
+            if obj_num==1:
+                page.wait(1)
+            else:
+                for page_num in range(1,eval(obj_num)):
+                    
+                    if page_num == obj_num:
+                        break
+                    else:
+                        obj.ele('下一页').click()
             
             # next
             if obj.ele('xpath://div[@class="next"]/a[@class="el-link el-link--primary"]/span[@class="el-link--inner"]').text != '暂无':
