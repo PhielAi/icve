@@ -11,30 +11,31 @@ your_password=input('输入你的密码：')
 def login(url):
     page.get(url=url,retry=3,interval=2,timeout=10)
     page.wait.load_start()
-    if page.ele('开启教学').click():
-        # login
-        # 第一次登陆
-        if page.ele('请先登录'):
-            page.ele('确定').click()
-            page.wait.load_start()
+    while True:
+        if page.ele('开启教学').click():
+            # login
+            # 第一次登陆
+            if page.ele('请先登录'):
+                page.ele('确定').click()
+                page.wait.load_start()
 
-            # 输入账号密码
-            page.ele('xpath://input[@placeholder="请输入账号"]').input(your_account)
-            page.ele('xpath://input[@placeholder="请输入密码"]').input(your_password)
-            page.ele('xpath://span[@class="el-checkbox__inner"]').click()
-            for i in page.eles('xpath://form[@class="el-form demo-ruleForm"]/div'):
-                if i.text == '登录':
-                    i.click()
-            print(i)
-            page.wait.load_start()
-            query()
-            
-        # 已经处于登录状态
+                # 输入账号密码
+                page.ele('xpath://input[@placeholder="请输入账号"]').input(your_account)
+                page.ele('xpath://input[@placeholder="请输入密码"]').input(your_password)
+                page.ele('xpath://span[@class="el-checkbox__inner"]').click()
+                for i in page.eles('xpath://form[@class="el-form demo-ruleForm"]/div'):
+                    if i.text == '登录':
+                        i.click()
+                print(i)
+                page.wait.load_start()
+                query()
+                
+            # 已经处于登录状态
+            else:
+                query()
+        
         else:
-            query()
-    
-    else:
-        print('网页未加载成功，请检查网址是否正确')
+            page.wait(1)
             
 def query():
     page.ele('我的课程').click()
